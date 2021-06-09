@@ -56,8 +56,8 @@ export class AppComponent implements OnInit {
     });
   }
 
-  complileteTodo(id: number): void {
-    this.todosService.complileteTodo(id).subscribe((todo) => {
+  completeTodo(id: number): void {
+    this.todosService.completeTodo(id).subscribe((todo) => {
       //this.todos.find((t) => t.id === todo.id).completed = true; // так было в видео, как я понял такакя штука не сработала потому что find возвращает значение, а не ссылку на элемент
       //поэтому было принято решение сделать так:
       this.todos[this.todos.findIndex((t) => t.id === todo.id)].completed =
