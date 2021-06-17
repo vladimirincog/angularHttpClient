@@ -20,11 +20,13 @@ export interface Todo {
 export class TodosService {
   constructor(private http: HttpClient) {}
 
+
   headers = new HttpHeaders({
     //Загаловки для post
     MyCustomHeader: Math.random().toString(),
     MyCustomHeader2: 'ZZZ',
   });
+
 
   addTodo(todo: Todo): Observable<Todo> {
     return this.http.post<Todo>(
@@ -38,12 +40,12 @@ export class TodosService {
 
   fetchTodos(): Observable<any> {
     let params = new HttpParams(); //квери параметры для get то что в URL после знака ?
-    params = params.append('_limit', '3');
-    params = params.append('custom', 'anything');
+    //params = params.append('_limit', '3');
+    //params = params.append('custom', 'anything');
     return this.http
       .get<Todo[]>('https://jsonplaceholder.typicode.com/todos?', {
         //params: new HttpParams().set('_limit', '3');
-        params: params,
+        params: params.set('_limit', '3').set('custom', 'anything'),
         observe: 'response', //позволяет получить дополнительную иформацию о запросе
       }) //нормальный URL https://jsonplaceholder.typicode.com/todos?_limit=2 не нормальный: https://jsonplaceholder.typicode.com/todos9?_limit=2
       .pipe(
